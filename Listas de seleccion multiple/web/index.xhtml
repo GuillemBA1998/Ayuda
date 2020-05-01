@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Motxila</title>
+    </h:head>
+    <h:body>
+        
+        <h1>Motxila</h1>
+        <br />
+        
+        <h:form>
+            <p:inputText value="#{controlador.nombre}" />
+
+            <p:inputText value="#{controlador.peso}" />
+
+            <p:commandButton value="Afegeix objecte" action="#{controlador.afegirObjecte()}" update="@form"/>
+
+            <p:selectManyMenu value="#{controlador.llistaObjectesSeleccionats}" scrollHeight="150" style="width: 400px" >
+                <f:selectItems value="#{controlador.llistaObjectes}" var="objecte" itemLabel="#{objecte.nombre} (#{objecte.peso})">
+                    <p:column binding="#{objecte.nombre}" ></p:column>
+                    <p:column binding="#{objecte.peso}" style="text-align: right"></p:column>
+                </f:selectItems>
+            </p:selectManyMenu>
+
+            <p:commandButton value="Elimina objectes" action="#{controlador.eliminarObjectes()}" update="@form"/>
+                                   
+        </h:form>
+        
+    </h:body>
+</html>
+
