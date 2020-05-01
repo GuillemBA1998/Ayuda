@@ -20,13 +20,17 @@
             <p:commandButton value="Afegeix objecte" action="#{controlador.afegirObjecte()}" update="@form"/>
 
             <p:selectManyMenu value="#{controlador.llistaObjectesSeleccionats}" scrollHeight="150" style="width: 400px" >
-                <f:selectItems value="#{controlador.llistaObjectes}" var="objecte" itemLabel="#{objecte.nombre} (#{objecte.peso})">
-                    <p:column binding="#{objecte.nombre}" ></p:column>
-                    <p:column binding="#{objecte.peso}" style="text-align: right"></p:column>
+                <f:selectItems id="H" value="#{controlador.llistaObjectes}" var="objecte" itemLabel="#{objecte.nombre} (#{objecte.peso})">
+                    <!--<p:column binding="#{objecte.nombre}" ></p:column>
+                    <p:column binding="#{objecte.peso}" style="text-align: right"></p:column>-->
                 </f:selectItems>
             </p:selectManyMenu>
 
             <p:commandButton value="Elimina objectes" action="#{controlador.eliminarObjectes()}" update="@form"/>
+            
+            <p:selectBooleanButton id="Ordenar" value="#{controlador.ordenado}" offLabel="No ordenado" onLabel="Ordenado" style="margin-right:20px;">
+                <p:ajax update="@form" listener="#{controlador.ordenar}" />
+            </p:selectBooleanButton>
                                    
         </h:form>
         

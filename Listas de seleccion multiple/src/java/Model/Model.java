@@ -28,6 +28,7 @@ public class Model implements Serializable {
     public List<Objecte> getLlistaObjectes() {
         return llistaObjectes;
     }
+
     
     public Model() {
         llistaObjectes = new LinkedList<>();

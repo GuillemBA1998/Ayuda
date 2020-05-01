@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import Model.Model;
 import java.util.List;
 import Model.Objecte;
+import java.util.Arrays;
 
 /**
  *
@@ -33,12 +34,23 @@ public class Controlador implements Serializable {
     
     @PostConstruct
     void init() {
+        ordenado = false;
         llistaObjectes = model.getLlistaObjectes();
     }
     private String Nombre;
     private double Peso;
     private List<Objecte> llistaObjectes;
     private List<Objecte> llistaObjectesSeleccionats;
+    private boolean ordenado;
+
+    public boolean isOrdenado() {
+        return ordenado;
+    }
+
+    public void setOrdenado(boolean ordeando) {
+        this.ordenado = ordeando;
+    }
+    
 
     public void setLlistaObjectesSeleccionats(List<Objecte> llistaObjectesSeleccionats) {
         this.llistaObjectesSeleccionats = llistaObjectesSeleccionats;
@@ -75,9 +87,48 @@ public class Controlador implements Serializable {
         Objecte objecte = new Objecte(Nombre, Peso);
         model.getLlistaObjectes().add(objecte);
     return "index";
- }
+    }
     public String eliminarObjectes() {
         model.getLlistaObjectes().removeAll(llistaObjectesSeleccionats);
     return "index";
     }
+    public String Ordenar(){
+        System.out.println(ordenado);
+        if(ordenado){
+            List<Objecte> Temp = llistaObjectes;
+            Objecte pequeño;
+            Objecte aux;
+            Objecte[] temporal = new Objecte[llistaObjectes.size()];
+            int j = llistaObjectes.size();
+            for (int i = 0; i < j; i++) {
+                pequeño = llistaObjectes.get(i);
+                aux = pequeño;
+                for (int k = 0; k < j ; k++) {
+                    if(aux.getPeso() > llistaObjectes.get(k).getPeso()){
+                        aux = llistaObjectes.get(k);
+                    }
+                    if(k==j-1){
+                        if(pequeño.getPeso() > aux.getPeso())
+                            temporal[j] = aux;
+                        else
+                            temporal[j] = pequeño;
+                    }
+                }
+            }
+            Temp.addAll(Arrays.asList(temporal));
+            model.getLlistaObjectes().removeAll(llistaObjectes);
+            model.getLlistaObjectes().addAll(Temp);
+        }
+        return "index";
+    }
+    
 }
+
+
+
+
+
+
+
+
+
