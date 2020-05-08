@@ -14,6 +14,7 @@ import Model.Model;
 import java.util.List;
 import Model.Objecte;
 import java.util.Collections;
+import java.util.LinkedList;
 
 /**
  *
@@ -34,14 +35,22 @@ public class Controlador implements Serializable {
     
     @PostConstruct
     void init() {
-        if(!ordenado)
-            llistaObjectes = model.getLlistaObjectes();
+        llistaObjectes = model.getLlistaObjectes();
     }
     private String Nombre;
     private int Peso;
     private List<Objecte> llistaObjectes;
+    private List<Objecte> llistadeSalida = new LinkedList<>();
     private List<Objecte> llistaObjectesSeleccionats;
-    private boolean ordenado;
+    private boolean debeOrdenarse;
+
+    public void setLlistadeSalida(List<Objecte> llistadeSalida) {
+        this.llistadeSalida = llistadeSalida;
+    }
+
+    public List<Objecte> getLlistadeSalida() {
+        return llistadeSalida;
+    }
 
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
@@ -59,12 +68,12 @@ public class Controlador implements Serializable {
         this.llistaObjectesSeleccionats = llistaObjectesSeleccionats;
     }
 
-    public void setOrdenado(boolean ordenado) {
-        this.ordenado = ordenado;
+    public void setDebeOrdenarse(boolean debeOrdenarse) {
+        this.debeOrdenarse = debeOrdenarse;
     }
 
-    public boolean isOrdenado() {
-        return ordenado;
+    public boolean isDebeOrdenarse() {
+        return debeOrdenarse;
     }
 
     public List<Objecte> getLlistaObjectesSeleccionats() {
@@ -85,22 +94,25 @@ public class Controlador implements Serializable {
     public String afegirObjecte() {
         Objecte objecte = new Objecte(Nombre, Peso);
         model.getLlistaObjectes().add(objecte);
-    return "index";
+        actualizar();
+        return "index";
     }
     public String eliminarObjectes() {
         model.getLlistaObjectes().removeAll(llistaObjectesSeleccionats);
-    return "index";
+        actualizar();
+        return "index";
     }
 
     /**
      *Ordena las lista de objetos 
      * @return
      */
-    public String ordenar(){
-        if(ordenado){
-            Collections.sort(llistaObjectes);
-        }else
-            llistaObjectes=model.getLlistaObjectes();
+    public String actualizar(){
+        llistadeSalida.clear();
+        llistadeSalida.addAll(model.getLlistaObjectes());
+        if(debeOrdenarse){
+            Collections.sort(llistadeSalida);
+        }        
         return "index";
     }
 }
