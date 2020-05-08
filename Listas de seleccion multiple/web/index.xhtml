@@ -19,10 +19,13 @@
             <p:commandButton value="Afegeix objecte" action="#{controlador.afegirObjecte()}" update="@form"/>
 
             <p:selectManyMenu value="#{controlador.llistaObjectesSeleccionats}" scrollHeight="150" style="width: 400px" >
-                <f:selectItems id="H" value="#{controlador.llistaObjectes}" var="objecte" itemLabel="#{objecte.nombre} (#{objecte.peso})">
-                    <!--<p:column binding="#{objecte.nombre}" ></p:column>
-                    <p:column binding="#{objecte.peso}" style="text-align: right"></p:column>-->
-                </f:selectItems>
+                <f:selectItems id="H" value="#{controlador.llistaObjectes}" var="objecte" itemLabel="#{objecte.nombre} (#{objecte.peso})" />
+                <p:column>
+                    <h:outputText value="#{objecte.nombre}"></h:outputText>                                       
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{objecte.peso}"></h:outputText>                     
+                </p:column>
             </p:selectManyMenu>
 
             <p:commandButton value="Elimina objectes" action="#{controlador.eliminarObjectes()}" update="@form"/>
