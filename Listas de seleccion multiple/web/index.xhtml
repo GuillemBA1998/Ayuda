@@ -12,26 +12,26 @@
         <h1>Motxila</h1>
         
         <h:form>
-            <p:inputText value="#{controlador.nombre}" />
+            <p:inputText value="#{controlador.nom}" />
 
-            <p:inputText value="#{controlador.peso}" />
+            <p:inputText value="#{controlador.pes}" />
 
             <p:commandButton value="Afegeix objecte" action="#{controlador.afegirObjecte()}" update="@form"/>
 
-            <p:selectManyMenu value="#{controlador.llistaObjectesSeleccionats}" scrollHeight="150" style="width: 400px" >
-                <f:selectItems id="H" value="#{controlador.llistadeSalida}" var="objecte" itemLabel="#{objecte.nombre} (#{objecte.peso})" />
+            <p:selectManyMenu value="#{controlador.llistaSeleccionats}" scrollHeight="150" style="width: 400px" >
+                <f:selectItems id="H" value="#{controlador.llistaSortida}" var="objecte" itemLabel="#{objecte.nom} (#{objecte.pes})" />
                 <p:column>
-                    <h:outputText value="#{objecte.nombre}"></h:outputText>                                       
+                    <h:outputText value="#{objecte.nom}"></h:outputText>                                       
                 </p:column>
                 <p:column>
-                    <h:outputText value="#{objecte.peso}"></h:outputText>                     
+                    <h:outputText value="#{objecte.pes}"></h:outputText>                     
                 </p:column>
             </p:selectManyMenu>
 
             <p:commandButton value="Elimina objectes" action="#{controlador.eliminarObjectes()}" update="@form"/>
             
-            <p:selectBooleanButton id="Ordenar" value="#{controlador.debeOrdenarse}" offLabel="No ordenado" onLabel="Ordenado" style="margin-right:20px;">
-                <p:ajax update="@form" listener="#{controlador.actualizar}" />
+            <p:selectBooleanButton id="Ordenar" value="#{controlador.ordenarObj}" offLabel="No ordenado" onLabel="Ordenado" style="margin-right:20px;">
+                <p:ajax update="@form" listener="#{controlador.ordenar}" />
             </p:selectBooleanButton>
                                    
         </h:form>

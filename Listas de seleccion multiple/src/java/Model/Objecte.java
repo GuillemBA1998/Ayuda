@@ -7,36 +7,36 @@ package Model;
 
 /**
  *
- * @author GERARD CAPILLA BAEZA
+ * @author Guillem
  */
 public class Objecte implements Comparable<Objecte> {
-    private String Nombre;
-    private int Peso;
+    private String nom;
+    private int pes;
 
-    public String getNombre() {
-        return Nombre;
+    public String getNom() {
+        return nom;
     }
 
-    public int getPeso() {
-        return Peso;
+    public int getPes() {
+        return pes;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public void setPeso(int Peso) {
-        this.Peso = Peso;
+    public void setPes(int pes) {
+        this.pes = pes;
     }
 
-    public Objecte(String Nombre, int Peso) {
-        this.Nombre = Nombre;
-        this.Peso = Peso;
+    public Objecte(String nom, int pes) {
+        this.nom = nom;
+        this.pes = pes;
     }  
 
     @Override
-    public int compareTo(Objecte o) {
-        return this.Peso -o.Peso;
+    public int compareTo(Objecte obj) {
+        return this.pes -obj.pes;
     }
     
 }

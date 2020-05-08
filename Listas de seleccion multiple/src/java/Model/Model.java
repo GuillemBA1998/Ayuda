@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author GERARD CAPILLA BAEZA
+ * @author Guillem
  */
 @Named(value = "model")
 @SessionScoped

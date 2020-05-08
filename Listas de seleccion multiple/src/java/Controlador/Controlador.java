@@ -18,7 +18,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author GERARD CAPILLA BAEZA
+ * @author Guillem 
  */
 @Named(value = "controlador")
 @SessionScoped
@@ -37,81 +37,81 @@ public class Controlador implements Serializable {
     void init() {
         llistaObjectes = model.getLlistaObjectes();
     }
-    private String Nombre;
-    private int Peso;
+    private String nom;
+    private int pes;
     private List<Objecte> llistaObjectes;
-    private List<Objecte> llistadeSalida = new LinkedList<>();
-    private List<Objecte> llistaObjectesSeleccionats;
-    private boolean debeOrdenarse;
+    private List<Objecte> llistaSortida = new LinkedList<>();
+    private List<Objecte> llistaSeleccionats;
+    private boolean ordenarObj;
 
-    public void setLlistadeSalida(List<Objecte> llistadeSalida) {
-        this.llistadeSalida = llistadeSalida;
+    public void setLlistaSortida(List<Objecte> llistaSortida) {
+        this.llistaSortida = llistaSortida;
     }
 
-    public List<Objecte> getLlistadeSalida() {
-        return llistadeSalida;
+    public List<Objecte> getLlistaSortida() {
+        return llistaSortida;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public void setPeso(int Peso) {
-        this.Peso = Peso;
+    public void setPes(int pes) {
+        this.pes = pes;
     }
 
     public void setLlistaObjectes(List<Objecte> llistaObjectes) {
         this.llistaObjectes = llistaObjectes;
     }
 
-    public void setLlistaObjectesSeleccionats(List<Objecte> llistaObjectesSeleccionats) {
-        this.llistaObjectesSeleccionats = llistaObjectesSeleccionats;
+    public void setLlistaSeleccionats(List<Objecte> llistaSeleccionats) {
+        this.llistaSeleccionats = llistaSeleccionats;
     }
 
-    public void setDebeOrdenarse(boolean debeOrdenarse) {
-        this.debeOrdenarse = debeOrdenarse;
+    public void setOrdenarObj(boolean ordenarObj) {
+        this.ordenarObj = ordenarObj;
     }
 
-    public boolean isDebeOrdenarse() {
-        return debeOrdenarse;
+    public boolean isOrdenarObj() {
+        return ordenarObj;
     }
 
-    public List<Objecte> getLlistaObjectesSeleccionats() {
-        return llistaObjectesSeleccionats;
+    public List<Objecte> getLlistaSeleccionats() {
+        return llistaSeleccionats;
     }
 
     public List<Objecte> getLlistaObjectes() {
         return llistaObjectes;
     }
     
-    public String getNombre() {
-        return Nombre;
+    public String getNom() {
+        return nom;
     }
 
-    public int getPeso() {
-        return Peso;
+    public int getPes() {
+        return pes;
     }
     public String afegirObjecte() {
-        Objecte objecte = new Objecte(Nombre, Peso);
+        Objecte objecte = new Objecte(nom, pes);
         model.getLlistaObjectes().add(objecte);
-        actualizar();
+        ordenar();
         return "index";
     }
     public String eliminarObjectes() {
-        model.getLlistaObjectes().removeAll(llistaObjectesSeleccionats);
-        actualizar();
+        model.getLlistaObjectes().removeAll(llistaSeleccionats);
+        ordenar();
         return "index";
     }
 
     /**
-     *Ordena las lista de objetos 
+     *Ordena les llistes 
      * @return
      */
-    public String actualizar(){
-        llistadeSalida.clear();
-        llistadeSalida.addAll(model.getLlistaObjectes());
-        if(debeOrdenarse){
-            Collections.sort(llistadeSalida);
+    public String ordenar(){
+        llistaSortida.clear();
+        llistaSortida.addAll(model.getLlistaObjectes());
+        if(ordenarObj){
+            Collections.sort(llistaSortida);
         }        
         return "index";
     }
