@@ -9,15 +9,15 @@ package Model;
  *
  * @author GERARD CAPILLA BAEZA
  */
-public class Objecte {
+public class Objecte implements Comparable<Objecte> {
     private String Nombre;
-    private double Peso;
+    private int Peso;
 
     public String getNombre() {
         return Nombre;
     }
 
-    public double getPeso() {
+    public int getPeso() {
         return Peso;
     }
 
@@ -25,14 +25,18 @@ public class Objecte {
         this.Nombre = Nombre;
     }
 
-    public void setPeso(double Peso) {
+    public void setPeso(int Peso) {
         this.Peso = Peso;
     }
 
-    public Objecte(String Nombre, double Peso) {
+    public Objecte(String Nombre, int Peso) {
         this.Nombre = Nombre;
         this.Peso = Peso;
+    }  
+
+    @Override
+    public int compareTo(Objecte o) {
+        return this.Peso -o.Peso;
     }
-    
     
 }

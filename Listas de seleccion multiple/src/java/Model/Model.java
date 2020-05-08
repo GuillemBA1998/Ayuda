@@ -24,7 +24,7 @@ public class Model implements Serializable {
      */
     
     final private List<Objecte> llistaObjectes;
-
+    
     public List<Objecte> getLlistaObjectes() {
         return llistaObjectes;
     }

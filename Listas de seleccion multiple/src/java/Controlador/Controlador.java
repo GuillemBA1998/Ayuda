@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import Model.Model;
 import java.util.List;
 import Model.Objecte;
-import java.util.Arrays;
+import java.util.Collections;
 
 /**
  *
@@ -34,26 +34,37 @@ public class Controlador implements Serializable {
     
     @PostConstruct
     void init() {
-        ordenado = false;
-        llistaObjectes = model.getLlistaObjectes();
+        if(!ordenado)
+            llistaObjectes = model.getLlistaObjectes();
     }
     private String Nombre;
-    private double Peso;
+    private int Peso;
     private List<Objecte> llistaObjectes;
     private List<Objecte> llistaObjectesSeleccionats;
     private boolean ordenado;
 
-    public boolean isOrdenado() {
-        return ordenado;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
-    public void setOrdenado(boolean ordeando) {
-        this.ordenado = ordeando;
+    public void setPeso(int Peso) {
+        this.Peso = Peso;
     }
-    
+
+    public void setLlistaObjectes(List<Objecte> llistaObjectes) {
+        this.llistaObjectes = llistaObjectes;
+    }
 
     public void setLlistaObjectesSeleccionats(List<Objecte> llistaObjectesSeleccionats) {
         this.llistaObjectesSeleccionats = llistaObjectesSeleccionats;
+    }
+
+    public void setOrdenado(boolean ordenado) {
+        this.ordenado = ordenado;
+    }
+
+    public boolean isOrdenado() {
+        return ordenado;
     }
 
     public List<Objecte> getLlistaObjectesSeleccionats() {
@@ -63,25 +74,13 @@ public class Controlador implements Serializable {
     public List<Objecte> getLlistaObjectes() {
         return llistaObjectes;
     }
-
-    public void setLlistaObjectes(List<Objecte> llistaObjectes) {
-        this.llistaObjectes = llistaObjectes;
-    }
     
     public String getNombre() {
         return Nombre;
     }
 
-    public double getPeso() {
+    public int getPeso() {
         return Peso;
-    }
-
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
-    }
-
-    public void setPeso(double Peso) {
-        this.Peso = Peso;
     }
     public String afegirObjecte() {
         Objecte objecte = new Objecte(Nombre, Peso);
@@ -93,35 +92,9 @@ public class Controlador implements Serializable {
     return "index";
     }
     public String Ordenar(){
-        System.out.println(ordenado);
-        if(ordenado){
-            List<Objecte> Temp = llistaObjectes;
-            Objecte pequeño;
-            Objecte aux;
-            Objecte[] temporal = new Objecte[llistaObjectes.size()];
-            int j = llistaObjectes.size();
-            for (int i = 0; i < j; i++) {
-                pequeño = llistaObjectes.get(i);
-                aux = pequeño;
-                for (int k = 0; k < j ; k++) {
-                    if(aux.getPeso() > llistaObjectes.get(k).getPeso()){
-                        aux = llistaObjectes.get(k);
-                    }
-                    if(k==j-1){
-                        if(pequeño.getPeso() > aux.getPeso())
-                            temporal[j] = aux;
-                        else
-                            temporal[j] = pequeño;
-                    }
-                }
-            }
-            Temp.addAll(Arrays.asList(temporal));
-            model.getLlistaObjectes().removeAll(llistaObjectes);
-            model.getLlistaObjectes().addAll(Temp);
-        }
+        Collections.sort(llistaObjectes);
         return "index";
     }
-    
 }
 
 
