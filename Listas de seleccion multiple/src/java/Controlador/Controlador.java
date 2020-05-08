@@ -97,7 +97,10 @@ public class Controlador implements Serializable {
      * @return
      */
     public String ordenar(){
-        Collections.sort(llistaObjectes);
+        if(ordenado){
+            Collections.sort(llistaObjectes);
+        }else
+            llistaObjectes=model.getLlistaObjectes();
         return "index";
     }
 }
