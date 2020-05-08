@@ -91,7 +91,12 @@ public class Controlador implements Serializable {
         model.getLlistaObjectes().removeAll(llistaObjectesSeleccionats);
     return "index";
     }
-    public String Ordenar(){
+
+    /**
+     *Ordena las lista de objetos 
+     * @return
+     */
+    public String ordenar(){
         Collections.sort(llistaObjectes);
         return "index";
     }
